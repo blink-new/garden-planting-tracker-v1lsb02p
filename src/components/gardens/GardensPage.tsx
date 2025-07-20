@@ -29,7 +29,7 @@ interface GardenPlant {
   status: string
   plant?: {
     name: string
-    type: string
+    plantType: string
     daysToMaturity: number
   }
 }
@@ -215,7 +215,7 @@ export function GardensPage() {
                       <div key={plant.id} className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
                         <div>
                           <p className="font-medium text-green-800">{plant.plant?.name || 'Unknown Plant'}</p>
-                          <p className="text-sm text-gray-600">{plant.plant?.type}</p>
+                          <p className="text-sm text-gray-600">{plant.plant?.plantType}</p>
                         </div>
                         <div className="text-sm text-gray-500">
                           {new Date(plant.plantedDate).toLocaleDateString()}
@@ -315,7 +315,7 @@ export function GardensPage() {
                     <div className="flex items-start justify-between mb-2">
                       <div>
                         <h3 className="font-semibold text-green-800">{plant.plant?.name || 'Unknown Plant'}</h3>
-                        <p className="text-sm text-gray-600">{plant.plant?.type}</p>
+                        <p className="text-sm text-gray-600">{plant.plant?.plantType}</p>
                       </div>
                       <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
                         {plant.status}

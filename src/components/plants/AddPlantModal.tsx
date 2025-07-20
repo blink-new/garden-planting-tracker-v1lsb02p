@@ -13,24 +13,28 @@ import { useToast } from '@/hooks/use-toast'
 interface Plant {
   id: string
   name: string
-  type: string
-  description: string
+  plantType: string
+  category: string
   daysToMaturity: number
-  spacing: string
-  sunRequirement: string
-  waterRequirement: string
+  spacingInches: number
+  sunRequirements: string
+  waterRequirements: string
+  scientificName?: string
+  soilPhMin?: number
+  soilPhMax?: number
+  frostTolerance?: string
 }
 
 interface PlantingSchedule {
   id: string
   plantId: string
   growZone: string
-  sowIndoorsStart: string
-  sowIndoorsEnd: string
+  sowIndoorStart: string
+  sowIndoorEnd: string
   transplantStart: string
   transplantEnd: string
-  directSowStart: string
-  directSowEnd: string
+  sowOutdoorStart: string
+  sowOutdoorEnd: string
   harvestStart: string
   harvestEnd: string
 }
@@ -89,7 +93,8 @@ export function AddPlantModal({ open, onOpenChange, gardenId, gardenZone, onPlan
 
   const filteredPlants = plants.filter(plant =>
     plant.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    plant.type.toLowerCase().includes(searchTerm.toLowerCase())
+    plant.plantType.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (plant.category && plant.category.toLowerCase().includes(searchTerm.toLowerCase()))
   )
 
   const getPlantSchedule = (plantId: string) => {
@@ -181,7 +186,7 @@ export function AddPlantModal({ open, onOpenChange, gardenId, gardenZone, onPlan
                         <div>
                           <h3 className="font-semibold text-green-800">{plant.name}</h3>
                           <Badge variant="outline" className="mt-1">
-                            {plant.type}
+                            {plant.plantType}
                           </Badge>
                         </div>
                         <div className="text-sm text-gray-600">
@@ -190,27 +195,29 @@ export function AddPlantModal({ open, onOpenChange, gardenId, gardenZone, onPlan
                         </div>
                       </div>
 
-                      <p className="text-sm text-gray-600 mb-3">{plant.description}</p>
+                      {plant.category && (
+                        <p className="text-sm text-gray-600 mb-3">{plant.category}</p>
+                      )}
 
                       <div className="grid grid-cols-3 gap-4 text-xs">
                         <div className="flex items-center">
                           <Thermometer className="w-3 h-3 mr-1 text-orange-500" />
-                          <span>{plant.sunRequirement}</span>
+                          <span>{plant.sunRequirements}</span>
                         </div>
                         <div className="flex items-center">
                           <Droplets className="w-3 h-3 mr-1 text-blue-500" />
-                          <span>{plant.waterRequirement}</span>
+                          <span>{plant.waterRequirements}</span>
                         </div>
                         <div className="text-gray-600">
-                          Spacing: {plant.spacing}
+                          Spacing: {plant.spacingInches}"
                         </div>
                       </div>
 
                       {schedule && (
                         <div className="mt-3 pt-3 border-t border-gray-100">
                           <div className="text-xs text-gray-600 space-y-1">
-                            <div><strong>Indoor Start:</strong> {formatDateRange(schedule.sowIndoorsStart, schedule.sowIndoorsEnd)}</div>
-                            <div><strong>Direct Sow:</strong> {formatDateRange(schedule.directSowStart, schedule.directSowEnd)}</div>
+                            <div><strong>Indoor Start:</strong> {formatDateRange(schedule.sowIndoorStart, schedule.sowIndoorEnd)}</div>
+                            <div><strong>Direct Sow:</strong> {formatDateRange(schedule.sowOutdoorStart, schedule.sowOutdoorEnd)}</div>
                             <div><strong>Harvest:</strong> {formatDateRange(schedule.harvestStart, schedule.harvestEnd)}</div>
                           </div>
                         </div>

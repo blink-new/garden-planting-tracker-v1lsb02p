@@ -3,6 +3,9 @@ import { Header } from '@/components/layout/Header'
 import { Navigation } from '@/components/layout/Navigation'
 import { Dashboard } from '@/components/dashboard/Dashboard'
 import { GardensPage } from '@/components/gardens/GardensPage'
+import { PlantLibrary } from '@/components/plants/PlantLibrary'
+import { PlantingCalendar } from '@/components/calendar/PlantingCalendar'
+import { Settings } from '@/components/settings/Settings'
 import { blink } from '@/blink/client'
 import { Toaster } from '@/components/ui/toaster'
 
@@ -84,26 +87,11 @@ function App() {
       case 'gardens':
         return <GardensPage />
       case 'library':
-        return (
-          <div className="text-center py-16">
-            <h2 className="text-2xl font-bold mb-4">Plant Library</h2>
-            <p className="text-muted-foreground">Coming soon - Browse plants and growing information</p>
-          </div>
-        )
+        return <PlantLibrary />
       case 'calendar':
-        return (
-          <div className="text-center py-16">
-            <h2 className="text-2xl font-bold mb-4">Planting Calendar</h2>
-            <p className="text-muted-foreground">Coming soon - View your planting schedule</p>
-          </div>
-        )
+        return <PlantingCalendar />
       case 'settings':
-        return (
-          <div className="text-center py-16">
-            <h2 className="text-2xl font-bold mb-4">Settings</h2>
-            <p className="text-muted-foreground">Coming soon - Manage your preferences</p>
-          </div>
-        )
+        return <Settings />
       default:
         return <Dashboard />
     }
