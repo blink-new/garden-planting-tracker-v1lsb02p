@@ -25,7 +25,7 @@ interface GardenPlant {
   gardenId: string
   plantId: string
   userId: string
-  plantedAt: string
+  plantedDate: string
   status: string
   plant?: {
     name: string
@@ -82,7 +82,7 @@ export function GardensPage() {
       const user = await blink.auth.me()
       const plantsData = await blink.db.gardenPlants.list({
         where: { userId: user.id },
-        orderBy: { plantedAt: 'desc' }
+        orderBy: { plantedDate: 'desc' }
       })
       setGardenPlants(plantsData)
     } catch (error) {
@@ -218,7 +218,7 @@ export function GardensPage() {
                           <p className="text-sm text-gray-600">{plant.plant?.type}</p>
                         </div>
                         <div className="text-sm text-gray-500">
-                          {new Date(plant.plantedAt).toLocaleDateString()}
+                          {new Date(plant.plantedDate).toLocaleDateString()}
                         </div>
                       </div>
                     ))}
@@ -322,7 +322,7 @@ export function GardensPage() {
                       </span>
                     </div>
                     <div className="text-sm text-gray-600">
-                      <p>Planted: {new Date(plant.plantedAt).toLocaleDateString()}</p>
+                      <p>Planted: {new Date(plant.plantedDate).toLocaleDateString()}</p>
                       {plant.plant?.daysToMaturity && (
                         <p>Days to maturity: {plant.plant.daysToMaturity}</p>
                       )}

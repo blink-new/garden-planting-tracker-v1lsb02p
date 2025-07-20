@@ -106,7 +106,7 @@ export function AddPlantModal({ open, onOpenChange, gardenId, gardenZone, onPlan
         gardenId,
         plantId: selectedPlant.id,
         userId: user.id,
-        plantedAt: new Date().toISOString(),
+        plantedDate: new Date().toISOString(),
         status: 'planned'
       })
 
