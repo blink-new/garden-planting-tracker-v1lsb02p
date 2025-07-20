@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react'
 import { Header } from '@/components/layout/Header'
 import { Navigation } from '@/components/layout/Navigation'
 import { Dashboard } from '@/components/dashboard/Dashboard'
+import { GardensPage } from '@/components/gardens/GardensPage'
 import { blink } from '@/blink/client'
+import { Toaster } from '@/components/ui/toaster'
 
 function App() {
   const [activeTab, setActiveTab] = useState('dashboard')
@@ -80,12 +82,7 @@ function App() {
       case 'dashboard':
         return <Dashboard />
       case 'gardens':
-        return (
-          <div className="text-center py-16">
-            <h2 className="text-2xl font-bold mb-4">My Gardens</h2>
-            <p className="text-muted-foreground">Coming soon - Manage your garden spaces</p>
-          </div>
-        )
+        return <GardensPage />
       case 'library':
         return (
           <div className="text-center py-16">
@@ -123,6 +120,7 @@ function App() {
           </div>
         </main>
       </div>
+      <Toaster />
     </div>
   )
 }
